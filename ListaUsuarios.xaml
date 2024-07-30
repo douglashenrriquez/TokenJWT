@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TokenJWT.ListaUsuarios"
+             Title="Lista de Usuarios">
+    <ScrollView Padding="10">
+        <VerticalStackLayout>
+            <Label 
+                Text="Lista de Usuarios"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <CollectionView x:Name="UsuariosCollectionView"
+                            ItemsLayout="VerticalStackLayout"
+                            Margin="0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Eliminar"
+                                               BackgroundColor="Red"
+                                               Invoked="OnDeleteSwipeItemInvoked"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Actualizar"
+                                               BackgroundColor="Orange"
+                                               Invoked="OnUpdateSwipeItemInvoked"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding usuario}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="{Binding pass}" FontSize="16" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

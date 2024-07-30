@@ -1,4 +1,6 @@
-﻿namespace TokenJWT
+﻿using Microsoft.Maui.Controls;
+
+namespace TokenJWT
 {
     public partial class App : Application
     {
@@ -7,6 +9,7 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+            //MainPage = new NavigationPage(new ListaUsuarios());
         }
     }
 }
