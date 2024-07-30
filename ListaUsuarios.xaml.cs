@@ -13,7 +13,7 @@ namespace TokenJWT
         public ListaUsuarios()
         {
             InitializeComponent();
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://192.168.1.8:5000") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://192.168.0.9:5000") };
             LoadUsuarios();
         }
 
@@ -74,17 +74,22 @@ namespace TokenJWT
             {
                 try
                 {
-                    var usuarioActualizado = new Usuario
+                    var usuarioActualizado = new
                     {
-                        usuario = resultado,
-                        pass = nuevaContraseña
+                        nuevoUsuario = resultado,
+                        nuevaContraseña = nuevaContraseña
                     };
 
                     var json = JsonConvert.SerializeObject(usuarioActualizado);
                     var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = await _httpClient.PutAsync($"/usuarios/{usuario.id}", content);
-                    response.EnsureSuccessStatusCode();
+                    HttpResponseMessage response = await _httpClient.PostAsync($"/usuarios/{usuario.id}", content);
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Error", $"No se pudo actualizar el usuario: {responseContent}", "OK");
+                        return;
+                    }
                     await DisplayAlert("Éxito", "Usuario actualizado con éxito", "OK");
                     LoadUsuarios();
                 }
@@ -94,6 +99,8 @@ namespace TokenJWT
                 }
             }
         }
+
+
     }
 
     public class Usuario

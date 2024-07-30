@@ -34,7 +34,10 @@
 
                             <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
                                 <VerticalStackLayout>
-                                    <Label Text="{Binding usuario}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="Usuario:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0"/>
+                                    <Label Text="{Binding usuario}" FontSize="18" />
+
+                                    <Label Text="Contraseña:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0"/>
                                     <Label Text="{Binding pass}" FontSize="16" />
                                 </VerticalStackLayout>
                             </Frame>
